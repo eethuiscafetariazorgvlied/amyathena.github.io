@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eethuis Cafetaria Zorgvlied</title>
+
+  <style>
+    /* ===== 全局 ===== */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      min-height: 100vh;
+
+      background-image: url("images/background.jpg");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      color: #3A3A3A;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(245,243,238,0.85);
+      z-index: -1;
+      pointer-events:none;
+    }
+  
+    h1,h2, h3 {
+      font-family: "Apple Chancery", "Playfair Display", serif;
+      font-weight: normal;
+      color:#2F5D50;
+      font-size: 36px;
+    }
+
+    /* ===== Header ===== */
+    header {
+      
+      position: sticky;
+    
+      z-index: 1000;
+      top: 16px;
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      height: auto;
+      gap: 12px;
+      background-image: url("images/header-bg.jpg");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      background-color: rgba(255,255,255,0.45);
+      backdrop-filter: blur(1.5px);
+    }
+
+    header img {
+      width: 300px;
+      height: auto;
+      margin-right: 12px;
+      padding: 0px;
+      border-radius:0;
+      background: transparent;
+      box-shadow: 
+        0 1px 3px ruga(0,0,0,0.18);
+    }
+
+    header h1 {
+      font-weight: 500;
+      margin: 0;
+      font-size: 48px;
+      text-align: center;
+      line-height:1.2;
+      flex: 1;
+    }
+
+    .lang button {
+      margin-left: 5px;
+      padding: 6px 10px;
+      cursor: pointer;
+    }
+
+    /* ===== Section ===== */
+    .section {
+      max-width: 1100px;
+      margin: 80px auto;
+      padding: 48px;
+      max-width:1100px;
+      background: rgba(255,255,255,0.94);
+      border-radius: 20px;
+      box-shadow: 0 14px 40px rgba(0,0,0,0.08)
+      
+
+    }
+
+    /* ===== Over ons ===== */
+    .over-ons {
+      display: grid;
+      grid-template-columns: 2fr 3fr;
+      gap: 48px;
+      align-items: center;
+      background: rgba(245,243,238,0.6);
+      padding: 24px 28px;
+      border-radius:12px
+    }
+
+    .over-ons img {
+      width: 100%;
+      height:340px;
+      object-fit: cover;
+      border-radius: 18px;
+      box-shadow: 0 16px 32px rgba(0,0,0,0.18)
+    }
+    .text-box {
+      background: rgba(245,243,238,0.7);
+      padding:32px 36px;
+      border-radius: 16px;
+    }
+    /* ===== Openingstijden ===== */
+    .section-small{
+      max-width: 700px;
+      text-align: center;
+    }
+
+    .opening-card{
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 24px;
+      margin-top: 24px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+    
+
+    /* ===== Menukaarten ===== */
+    .menukaarten {
+      text-align: center;
+    }
+
+    .menus {
+      display: flex;
+      gap: 25px;
+      margin-top: 25px;
+    }
+
+    .menu-box {
+      flex: 1;
+      text-align: center;
+    }
+
+    .menu-box img {
+      width: 50%;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .menu-box img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+      background: #2F5D50;
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: rgba(255,255,255,0.9);
+      font-size: 16px;
+    }
+
+    /* ===== 手机 ===== */
+    @media (max-width: 700px) {
+      header{
+        padding: 12px 16px;
+        top:8px;
+      }
+      header h1 {
+        font-size: 30px;
+      }
+
+      .over-ons,
+      .openingstijden,
+      .menus {
+        flex-direction: column;
+      }
+
+      .over-ons img {
+        width: 100%;
+      }
+      footer {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+
+<script>
+  function setLang(lang) {
+    const elements = document.querySelectorAll('[data-nl]');
+
+    elements.forEach(el => {
+      const text = el.dataset[lang];
+      if (text) {
+        el.textContent = text;
+      }
+    });
+
+    document.documentElement.lang = lang;
+    localStorage.setItem('lang', lang);
+  }
+
+  // 页面加载时自动恢复语言
+  const savedLang = localStorage.getItem('lang') || 'nl';
+  setLang(savedLang);
+</script>
+
+<body>
+
+<!-- ===== Header ===== -->
+<header>
+  <img src="images/logo.png" alt="logo">
+
+  <h1
+    data-nl="Eethuis Cafetaria Zorgvlied"
+    data-en="Eethuis Cafeteria Zorgvlied"
+  >
+    Eethuis Cafetaria Zorgvlied
+  </h1>
+
+  <div class="lang">
+    <button onclick="setLang('nl')">NL</button>
+    <button onclick="setLang('en')">EN</button>
+  </div>
+</header>
+
+<!-- ===== Over ons ===== -->
+<section class="section">
+  <div class="over-ons">
+    <img src="images/over-ons.jpg" alt="Over ons">
+
+    <div class="text-box">
+      <h2 data-nl="Over ons" data-en="About us">Over ons</h2>
+      <p
+        data-nl="Aan de Drents-Friese grens vind je onze eethuis en Cafetaria
+        onder een dak. 
+          Op ons ruime terras kijk je
+        uit over de weilanden - een heerlijk uitzicht om even helemaal
+        tot rust te komen.
+          In ons eethuis serveren wij koffie met taart, lunch
+        en avondmaaltijd, geserveerd in plates met aandacht voor kwaliteit
+        en eenvoud.
+          In de cafetaria/snackbar kun je terecht voor verse friet, milkshakes, 
+        heerlijk softijs en andere snacks, zowel om hier te eten als om mee
+        te nemen.
+          of je nu langskomt voor een korte pauze tijdens een fietstocht, een 
+        gezellig moment op het terras of een ontspannen maaltiijd:
+        bij ons voel je je welkom."
+
+        data-en="On the Drenthe-Frisian border, you'll find our restaurant and cafeteria
+        under one roof.        
+          Our spacious terrace is one of the most beautiful places to sit, with an
+        unobstructed and green view of the meadows.
+          In our restaurant, we serve coffee and cake, lunch
+        and dinner, served in plates with a focus on quality
+        and simplicity.
+          In the cafeteria/snack bar, you can enjoy fresh fries, milkshakes,
+        delicious soft serve ice cream, and other snacks, both to eat in and to take
+        away.
+          Whether you're stopping by for a short break during a bike ride, a
+        sociable moment on the terrace, or a relaxing meal:
+        you'll feel welcome here.">
+        Aan de Drents-Friese grens vind je onze eethuis en cafetaria onder een dak.
+        Op ons ruime terras kijk je
+        uit over de weilanden - een heerlijk uitzicht om even helemaal
+        tot rust te komen.
+          In ons eethuis serveren wij koffie met taart, lunch
+        en avondmaaltijd, geserveerd in plates met aandacht voor kwaliteit
+        en eenvoud.
+          In de cafetaria/snackbar kun je terecht voor verse friet, milkshakes, 
+        heerlijk softijs en andere snacks, zowel om hier te eten als om mee
+        te nemen.
+          of je nu langskomt voor een korte pauze tijdens een fietstocht, een 
+        gezellig moment op het terras of een ontspannen maaltiijd:
+        bij ons voel je je welkom."
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Openingstijden ===== -->
+<section class="section section-small">
+  <h2>Openingstijden</h2>
+  
+  <div class="opening-card">
+    <p
+      data-nl="Ma – Do: Gesloten
+      Vri:12:00-13;30, 16:30-19:30
+      Za:16:30-19:30 
+      Zo:16:30-19:00
+      "
+      data-en="Mon - Thu: closed
+      Fri: 12:30pm -13:30pm, 16:30pm-19:30pm
+      Sat:16:30pm-19:30pm
+      Sun:16:00pm-19:00pm
+      ">
+      Ma – Do: Gesloten<br>
+      Vri:12:00-13;30, 16:30-19:30<br>
+      Za:16:30-19:30 <br>
+      Zo:16:30-19:00
+    </p>
+  </div>
+</section>
+
+<!-- ===== Menukaarten ===== -->
+<section class="menukaarten">
+  <h2 data-nl="Onze menukaarten" data-en="Our menus">Onze menukaarten</h2>
+
+  <p
+    data-nl="Geniet van een gezellige maaltijd bij ons, of neem iets lekkers
+    mee naar huis!"
+    data-en="Enjoy dining with us or order to take away!">
+  
+    ❤️Geniet van een gezellige maaltijd bij ons, of neem iets lekkers
+    mee naar huis!❤️
+  </p>
+
+  <div class="menus">
+    <div class="menu-box">
+      <a href="menu-eethuis.html">
+        <img src="images/eethuis.jpg" alt="Eethuis">
+      </a>
+      <h3 data-nl="Eethuis" data-en="Dine-in">Eethuis</h3>
+    </div>
+
+    <div class="menu-box">
+      <a href="menu-afhalen.html">
+        <img src="images/afhalen.jpg" alt="Afhalen">
+      </a>
+      <h3 data-nl="Afhalen" data-en="Take away">Afhalen</h3>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Dorpstraat 1A, Zorgvlied, Nederland<br>
+  Tel: 0521 - 388198
+</footer>
+
+<script>
+function setLang(lang) {
+  document.querySelectorAll("[data-nl]").forEach(el => {
+    el.innerText = el.dataset[lang];
+  });
+}
+</script>
+
+</body>
+</html>
